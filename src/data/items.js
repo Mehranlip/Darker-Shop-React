@@ -2,27 +2,51 @@ const productList = [
     {
         id: "1",
         title: "MacBook Pro",
-        price: 99,
+        price: 180000000,
         image: "/images/product.jpg"
     },
     {
         id: "2",
-        title: "MacBook Pro",
-        price: 99,
-        image: "/images/product.jpg"
+        title: "AirPad",
+        price: 15000000,
+        image: "/images/airpads.jpg"
     },
     {
         id: "3",
-        title: "MacBook Pro",
-        price: 99,
-        image: "/images/product.jpg"
+        title: "headphones",
+        price: 50000000,
+        image: "/images/headphone.jfif"
     },
     {
         id: "4",
-        title: "MacBook Pro",
-        price: 99,
-        image: "/images/product.jpg"
-    }
+        title: "iPad",
+        price: 60000000,
+        image: "/images/ipad.jpg"
+    },
+    {
+        id: "5",
+        title: "MacBook Air",
+        price: 45000000,
+        image: "/images/macbook-air.jfif"
+    },
+    {
+        id: "6",
+        title: "Apple Mouse",
+        price: 8000000,
+        image: "/images/mouse.jfif"
+    },
+    {
+        id: "7",
+        title: "Apple Watch",
+        price: 45000000,
+        image: "/images/watch.jpg"
+    },
+    {
+        id: "8",
+        title: "iPhone",
+        price: 12000000,
+        image: "/images/iphone.jpg"
+    },
 ]
 
 function getProductData(id) {

@@ -48,13 +48,14 @@ export function CartProvider({ children }) {
     //  removeItemFromCart function
     function removeItemFromCart(id) {
         const quantity = getProductQuantity(id)
+
         if (quantity === 1) {
-            deleteFromCart()
+            deleteFromCart(id)
         } else {
             setCartProduct(
-                cartProduct.map((item) => {
+                cartProduct.map((item) =>
                     item.id === id ? { ...item, quantity: item.quantity - 1 } : item
-                })
+                )
             )
         }
     }
