@@ -69,8 +69,9 @@ export function CartProvider({ children }) {
 
             totalAmount += productData.price * item.quantity
         })
-    }
 
+        return totalAmount
+    }
 
 
 
