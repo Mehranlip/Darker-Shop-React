@@ -7,6 +7,7 @@ import { CartProvider } from "./context/CartContext"
 import Navbar from "./components/Navbar"
 import Shop from "./pages/Shop"
 import Success from "./pages/success"
+import Footer from "./components/Footer"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Shop />} />
           <Route path='/success' element={<Success />} />
         </Routes>
+        <Footer />
       </Container>
     </CartProvider>
   )
