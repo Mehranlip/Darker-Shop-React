@@ -38,7 +38,9 @@ function Navbar() {
             <NavbarBs className="border-bottom border-secondary">
                 <NavbarBs.Collapse className="justify-content-between align-items-center">
                     <div>
-                        <img width="170px" src="../../public/logo.svg" />
+                        <a href="/">
+                            <img width="170px" src="../../public/logo.svg" />
+                        </a>
                     </div>
                     <Button onClick={handlerShow} variant="btn btn-outline-secondary" className="text-white">
                         ({productCounts})
