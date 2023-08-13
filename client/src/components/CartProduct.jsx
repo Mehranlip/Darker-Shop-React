@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Row, Col } from 'react-bootstrap'
 
 import { cartContext } from '../context/CartContext'
 
@@ -12,17 +12,26 @@ function CartProduct({ id, quantity }) {
 
     return (
         <>
-            <p>{productData.title}</p>
-            <p>تعداد: {quantity}</p>
-            <p>قیمت: {quantity * productData.price}</p>
-            <Button
-                size='sm'
-                className='mb-5 text-white'
-                variant='btn btn-outline-secondary'
-                onClick={() => cart.deleteFromCart(id)}
-            >
-                حذف
-            </Button>
+            <Row>
+                <Col sm={3}>
+                    <img className='rounded' src={productData.image} width={100} height={100} />
+                </Col>
+                <Col sm={9}>
+                    <p>اسم محصول : {productData.title}</p>
+                    <p>تعداد: {quantity}</p>
+                    <p>قیمت: {quantity * productData.price}</p>
+
+                    <Button
+                        size='sm'
+                        className='mb-5 text-white'
+                        variant='btn btn-outline-secondary'
+                        onClick={() => cart.deleteFromCart(id)}
+                    >
+                        حذف محصول
+                    </Button>
+                </Col>
+            </Row>
+
         </>
     )
 }

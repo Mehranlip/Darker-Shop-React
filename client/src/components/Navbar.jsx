@@ -62,7 +62,8 @@ function Navbar() {
                                         quantity={item.quantity}
                                     ></CartProduct>
                                 ))}
-                                <h3>مجموع قیمت: {cart.getTotalAmount()}</h3>
+                                <hr />
+                                <h4>مجموع قیمت: {cart.getTotalAmount()}</h4>
                             </>
                         ) : (
                             <h3>سبد خرید خالی است</h3>
