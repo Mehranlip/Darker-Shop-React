@@ -10,7 +10,7 @@ function ProductItem({ product }) {
 
     return (
         <Card className="mt-3 card-bg">
-            <Card.Body>
+            <Card.Body className="">
                 <Card.Img className="rounded" variant="top" src={product.image} height="200px" style={{ objectFit: "cover" }} />
                 <Card.Title align="right" className="text-light pt-4">
                     {product.title}

@@ -9,6 +9,9 @@ import Shop from "./pages/Shop"
 import Success from "./pages/success"
 import Footer from "./components/Footer"
 
+import ProductDetail from "./pages/productDetail"
+
+
 function App() {
   return (
     <CartProvider>
@@ -17,6 +20,7 @@ function App() {
         <Routes>
           <Route index element={<Shop />} />
           <Route path='/success' element={<Success />} />
+          <Route path="/products/:productId" element={<ProductDetail />} />
         </Routes>
         <Footer />
       </Container>

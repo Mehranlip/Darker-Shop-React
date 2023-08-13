@@ -6,6 +6,7 @@ import productCat from "../data/categoeis";
 
 
 import ProductItem from './../components/ProductItem';
+import { Link } from "react-router-dom";
 
 
 const getFilteredItem = (query, items, checkBoxValue, rangePrice) => {
@@ -74,9 +75,11 @@ function Shop() {
                 <Col sm={12} md={10}>
                     <Row xs={1} md={3} className="g-3 p-4">
                         {filteredItems.map((item) => (
-                            <Col key={item.id} align="center">
-                                <ProductItem product={item} />
-                            </Col>
+                            <Link className="text-decoration-none" to={`/products/${item.id}`}>
+                                <Col key={item.id} align="center">
+                                    <ProductItem product={item} />
+                                </Col>
+                            </Link>
                         ))}
                     </Row>
                 </Col>
