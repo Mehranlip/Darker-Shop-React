@@ -6,34 +6,33 @@ import productCat from "../data/categoeis";
 
 
 import ProductItem from './../components/ProductItem';
-import { Link } from "react-router-dom";
-
-
-const getFilteredItem = (query, items, checkBoxValue, rangePrice) => {
-    if (rangePrice) {
-        return items.filter((item) => item.price >= rangePrice)
-    }
-    if (checkBoxValue) {
-        return items.filter((item) => item.cat.includes(checkBoxValue))
-    }
-    if (!query) {
-        return items
-    }
-    return items.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()))
-}
 
 
 function Shop() {
     const [query, setQuery] = useState("")
-    const [checkBoxValue, setCheckboxValue] = useState()
+    const [checkBoxValue, setCheckboxValue] = useState("All")
     const [rangePrice, setRangePrice] = useState(0)
 
-    const filteredItems = getFilteredItem(query, productList, checkBoxValue, rangePrice)
+    const allItems = [...productList];
+
+    const filteredItems = allItems.filter(itme => {
+        const withinPriceRange = itme.price >= rangePrice
+        const matchesCategory = checkBoxValue === "All" || itme.cat === checkBoxValue
+        const matchesSearchTerm = itme.title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+
+        return withinPriceRange && matchesCategory && matchesSearchTerm;
+    });
 
 
     const handleCheckBoxValue = (e) => {
         const newData = e.target.value;
         setCheckboxValue(newData);
+
+        if (e.target.checked) {
+            setCheckboxValue(e.target.value)
+        } else {
+            setCheckboxValue("All")
+        }
     };
 
     return (
@@ -49,9 +48,9 @@ function Shop() {
                         <span>فیلتر بر اساس دسته بندی</span>
                         <hr className="m-2" />
                         {productCat.map((item) => (
-                            <ul className="list-unstyled">
+                            <ul key={item.cat} className="list-unstyled">
                                 <li >
-                                    <label key={item.cat}>
+                                    <label>
                                         <input className="mx-2"
                                             onChange={handleCheckBoxValue}
                                             type="checkbox"
@@ -66,21 +65,27 @@ function Shop() {
                         <hr className="m-2" />
                         <span>فیلتر بر اساس قیمت</span>
                         <hr className="m-2" />
-                        <label for="customRange2" class="form-label">{`از 0 تا ${rangePrice}`} {" "}تومان</label>
-                        <input type="range" class="form-range" min="0" max="180000000" id="customRange2" onChange={(e) => setRangePrice(e.target.value)}></input>
+                        <label htmlFor="customRange2" className="form-label">{`از 0 تا ${rangePrice}`} {" "}تومان</label>
+                        <input type="range" className="form-range" min="0" max="180000000" id="customRange2" onChange={(e) => setRangePrice(e.target.value)}></input>
                         {/* end filtered price  */}
 
                     </div>
                 </Col>
                 <Col sm={12} md={10}>
                     <Row xs={1} md={3} className="g-3 p-4">
-                        {filteredItems.map((item) => (
-                            <Link className="text-decoration-none" to={`/products/${item.id}`}>
+                        {filteredItems.length > 0 ? (
+                            filteredItems.map((item) => (
                                 <Col key={item.id} align="center">
                                     <ProductItem product={item} />
                                 </Col>
-                            </Link>
-                        ))}
+                            ))
+                        ) : (
+                            productList.map((item) => (
+                                <Col key={item.id} align="center">
+                                    <ProductItem product={item} />
+                                </Col>
+                            ))
+                        )}
                     </Row>
                 </Col>
             </Row>

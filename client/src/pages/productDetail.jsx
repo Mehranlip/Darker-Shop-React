@@ -6,6 +6,9 @@ import { Row, Col, Button, Form } from "react-bootstrap"
 import { useContext } from "react"
 import { cartContext } from "../context/CartContext"
 
+
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
 function ProductDetail() {
 
     const { productId } = useParams()
@@ -59,7 +62,11 @@ function ProductDetail() {
             </Col>
             <Col className="order-0 order-md-1" sm={12} md={4}>
                 <div className="p-3">
-                    <img className="rounded" src={thisProduct.image} width="320" height="300" />
+                    <TransformWrapper>
+                        <TransformComponent>
+                            <img className="rounded" src={thisProduct.image} width="320" height="300" />
+                        </TransformComponent>
+                    </TransformWrapper>
                 </div>
             </Col>
         </Row>
