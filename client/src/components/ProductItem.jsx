@@ -3,6 +3,8 @@ import { useContext } from "react"
 import { cartContext } from "../context/CartContext"
 import { Link } from "react-router-dom"
 
+import { toast } from 'react-toastify';
+
 
 function ProductItem({ product }) {
     const cart = useContext(cartContext)

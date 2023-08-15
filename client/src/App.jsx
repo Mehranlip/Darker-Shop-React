@@ -12,8 +12,11 @@ import Footer from "./components/Footer"
 import ProductDetail from "./pages/productDetail"
 
 
+
+
 function App() {
   return (
+
     <CartProvider>
       <Container>
         <Navbar />
@@ -25,6 +28,7 @@ function App() {
         <Footer />
       </Container>
     </CartProvider>
+
   )
 }
 

@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 import { getProductData } from "../data/items";
+import { toast } from 'react-toastify';
+
 
 
 export const cartContext = createContext({
@@ -36,6 +38,7 @@ export function CartProvider({ children }) {
                 cartProduct.map((item) => item.id === id ? { ...item, quantity: item.quantity + 1 } : item)
             )
         }
+        toast.success("محصول به سبد خرید افزوده شد")
     }
 
     // deleteFromCart function
@@ -43,6 +46,8 @@ export function CartProvider({ children }) {
         setCartProduct((cartProduct) => cartProduct.filter((item) => {
             return item.id !== id
         }))
+
+        toast.error("محصول به کلی از سبد خرید حذف شد")
     }
 
     //  removeItemFromCart function
@@ -58,6 +63,8 @@ export function CartProvider({ children }) {
                 )
             )
         }
+
+        toast.warn("یک عدد از محصول مورد نظر حذف شد")
     }
 
     // getTotalAmount function

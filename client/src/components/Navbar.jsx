@@ -4,6 +4,8 @@ import { BsCart } from 'react-icons/bs'
 import { cartContext } from "../context/CartContext"
 import CartProduct from "./CartProduct"
 
+import { ToastContainer } from 'react-toastify';
+
 
 function Navbar() {
     const [showModal, setShowModal] = useState(false)
@@ -35,6 +37,7 @@ function Navbar() {
 
     return (
         <>
+            <ToastContainer position="bottom-right mt-6" theme="dark" limit={3} />
             <NavbarBs className="border-bottom border-secondary">
                 <NavbarBs.Collapse className="justify-content-between align-items-center">
                     <div>

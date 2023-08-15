@@ -1,7 +1,10 @@
+* {
+  font-family: 'Rubik', sans-serif !important;
+}
+
 body {
   background-color: #111111;
   color: #f1f1f1;
-  font-family: 'Rubik', sans-serif;
   direction: rtl;
 }
 
