@@ -1,14 +1,33 @@
 * {
   font-family: 'Rubik', sans-serif !important;
-}
-
-body {
-  background-color: #111111;
-  color: #f1f1f1;
   direction: rtl;
 }
 
+.dark-mode {
+  background-color: #111;
+  color: #fff;
 
-.card-bg {
-  background-color: #1a1c1e;
+
+  .card-bg {
+    background-color: #1a1c1e;
+  }
+
+  .text-color {
+    color: #ffffff;
+  }
+
+}
+
+.light-mode {
+  background-color: #fff;
+  color: #000000 !important;
+
+  .card-bg {
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  }
+
+  .text-color {
+    color: #000000;
+  }
 }

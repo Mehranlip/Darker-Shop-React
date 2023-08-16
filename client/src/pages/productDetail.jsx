@@ -36,21 +36,21 @@ function ProductDetail() {
                                 {productQuantity > 0 ? (
                                     <>
                                         <Form as={Row}>
-                                            <Form.Label column="true" sm={6} className="text-white">
+                                            <Form.Label column="true" sm={6} className="text-color">
                                                 تعداد : {productQuantity}
                                             </Form.Label>
                                             <Col sm="6">
-                                                <Button sm="6" className="mx-2 text-white" variant="btn btn-outline-secondary"
+                                                <Button sm="6" className="mx-2 text-color" variant="btn btn-outline-secondary"
                                                     onClick={() => cart.addItemToCart(thisProduct.id)}
                                                 >+</Button>
-                                                <Button sm="6" className="mx-2 text-white" variant="btn btn-outline-secondary"
+                                                <Button sm="6" className="mx-2 text-color" variant="btn btn-outline-secondary"
                                                     onClick={() => cart.removeItemFromCart(thisProduct.id)}
                                                 >-</Button>
                                             </Col>
                                         </Form>
                                     </>
                                 ) : (
-                                    <Button onClick={() => cart.addItemToCart(thisProduct.id)} variant="btn btn-outline-secondary" className="text-white">
+                                    <Button onClick={() => cart.addItemToCart(thisProduct.id)} variant="btn btn-outline-secondary" className="text-color">
                                         افزودن به سبد خرید
                                     </Button>
                                 )}

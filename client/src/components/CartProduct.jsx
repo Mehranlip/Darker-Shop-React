@@ -5,7 +5,7 @@ import { cartContext } from '../context/CartContext'
 
 import { getProductData } from '../data/items'
 
-function CartProduct({ id, quantity }) {
+function CartProduct({ id, quantity, darkMode }) {
     const cart = useContext(cartContext)
 
     const productData = getProductData(id)
@@ -23,7 +23,7 @@ function CartProduct({ id, quantity }) {
 
                     <Button
                         size='sm'
-                        className='mb-5 text-white'
+                        className={darkMode ? 'mb-5 text-white' : 'mb-5 text-dark'}
                         variant='btn btn-outline-secondary'
                         onClick={() => cart.deleteFromCart(id)}
                     >

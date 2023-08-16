@@ -7,7 +7,7 @@ import CartProduct from "./CartProduct"
 import { ToastContainer } from 'react-toastify';
 
 
-function Navbar() {
+function Navbar({ darkMode, toggleDarkMode }) {
     const [showModal, setShowModal] = useState(false)
     const cart = useContext(cartContext)
     const productCounts = cart.items.reduce((sum, product) => sum + product.quantity, 0)
@@ -37,15 +37,22 @@ function Navbar() {
 
     return (
         <>
-            <ToastContainer position="bottom-right mt-6" theme="dark" limit={3} />
+            <ToastContainer position="bottom-right mt-6" theme={darkMode ? "dark" : "light"} limit={3} autoClose={2000} />
+
             <NavbarBs className="border-bottom border-secondary">
+
                 <NavbarBs.Collapse className="justify-content-between align-items-center">
                     <div>
                         <a href="/">
-                            <img width="170px" src="../../public/logo.svg" />
+                            {darkMode ? <img width="170px" src="../../public/logo.svg" /> : <img width="170px" src="../../public/logo-dark.svg" />}
                         </a>
                     </div>
-                    <Button onClick={handlerShow} variant="btn btn-outline-secondary" className="text-white">
+                    <div>
+
+                        {darkMode ? <img onClick={toggleDarkMode} src="../../public/light-mode-icon.png" width={50} /> : <img onClick={toggleDarkMode} src="../../public/dark-mode-icon.png" width={50} />}
+
+                    </div>
+                    <Button onClick={handlerShow} variant="btn btn-outline-secondary" className={darkMode ? "text-white" : "text-dark"}>
                         ({productCounts})
                         <BsCart className="mx-2"></BsCart>
                         سبدخرید
@@ -59,7 +66,7 @@ function Navbar() {
                             <>
                                 <h3 className='mb-4'>سبد خرید</h3>
                                 {cart.items.map((item) => (
-                                    <CartProduct
+                                    <CartProduct darkMode={darkMode}
                                         key={item.id}
                                         id={item.id}
                                         quantity={item.quantity}
@@ -72,7 +79,7 @@ function Navbar() {
                             <h3>سبد خرید خالی است</h3>
                         )}
                         <Button className="mt-4" variant="btn btn-light" onClick={checkout}>ثبت سفارش</Button>
-                        <Button onClick={handlerClose} variant="btn btn-outline-secondary" className="mt-4 mx-3 text-white">بستن</Button>
+                        <Button onClick={handlerClose} variant="btn btn-outline-secondary" className={darkMode ? "mt-4 mx-3 text-white" : "mt-4 mx-3 text-dark"}>بستن</Button>
                     </Modal.Body>
                 </Modal.Header>
             </Modal>
