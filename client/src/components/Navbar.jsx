@@ -60,8 +60,8 @@ function Navbar({ darkMode, toggleDarkMode }) {
                 </NavbarBs.Collapse>
             </NavbarBs>
             <Modal show={showModal} onHide={handlerClose} contentClassName="card-bg" dir="rtl">
-                <Modal.Header>
-                    <Modal.Body>
+                <Modal.Header className={darkMode ? "dark-mode" : "light-mode"}>
+                    <Modal.Body >
                         {productCounts > 0 ? (
                             <>
                                 <h3 className='mb-4'>سبد خرید</h3>
