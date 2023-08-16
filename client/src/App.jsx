@@ -10,14 +10,22 @@ import Success from "./pages/success"
 import Footer from "./components/Footer"
 
 import ProductDetail from "./pages/productDetail"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 
 
 
 function App() {
 
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme === "light" ? false : true;
+  });
+
+
+  useEffect(() => {
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
