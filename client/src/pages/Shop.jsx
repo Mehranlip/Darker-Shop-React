@@ -12,6 +12,7 @@ function Shop() {
     const [query, setQuery] = useState("")
     const [checkBoxValue, setCheckboxValue] = useState("All")
     const [rangePrice, setRangePrice] = useState(0)
+    const selectedCategory = checkBoxValue === "All" ? "همه محصولات" : productCat.find(item => item.cat === checkBoxValue)?.namecat || "";
 
     const allItems = [...productList];
 
@@ -72,7 +73,18 @@ function Shop() {
                     </div>
                 </Col>
                 <Col sm={12} md={10}>
-                    <Row xs={1} md={3} className="g-3 p-4">
+                    <Row className="justify-content-center px-4 py-1 mt-3">
+                        <Col>
+                            <span>
+                                {selectedCategory && (
+                                    <span className="mx-2">
+                                        دسته‌بندی/ {selectedCategory}
+                                    </span>
+                                )}
+                            </span>
+                        </Col>
+                    </Row>
+                    <Row xs={1} md={3} className="g-3 px-4 py-1">
                         {filteredItems.length > 0 ? (
                             filteredItems.map((item) => (
                                 <Col key={item.id} align="center">
