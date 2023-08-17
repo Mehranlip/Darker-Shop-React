@@ -28,9 +28,6 @@ const Footer = () => {
             </Container>
             <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                 © 2023 کلیه حقوق این وب‌سایت محفوظ است.
-                <a className="text-color" href="#">
-                    طراحی توسط من
-                </a>
             </div>
         </footer>
     );
