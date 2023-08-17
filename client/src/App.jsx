@@ -11,6 +11,9 @@ import Footer from "./components/Footer"
 
 import ProductDetail from "./pages/productDetail"
 import { useState, useEffect } from "react"
+import LoginForm from "./pages/Login"
+import RegistrationForm from "./pages/Registration"
+import Dashboard from "./pages/Dashboard"
 
 
 
@@ -41,6 +44,9 @@ function App() {
             <Route index element={<Shop />} />
             <Route path='/success' element={<Success />} />
             <Route path="/products/:productId" element={<ProductDetail />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegistrationForm />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
           <Footer />
         </Container>

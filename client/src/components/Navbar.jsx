@@ -1,16 +1,18 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { Navbar as NavbarBs, Button, Modal } from "react-bootstrap"
 import { BsCart } from 'react-icons/bs'
 import { cartContext } from "../context/CartContext"
 import CartProduct from "./CartProduct"
 
 import { ToastContainer } from 'react-toastify';
+import { Link } from "react-router-dom"
 
 
 function Navbar({ darkMode, toggleDarkMode }) {
     const [showModal, setShowModal] = useState(false)
     const cart = useContext(cartContext)
     const productCounts = cart.items.reduce((sum, product) => sum + product.quantity, 0)
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handlerShow = () => {
         setShowModal(true)
@@ -35,6 +37,13 @@ function Navbar({ darkMode, toggleDarkMode }) {
 
 
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(!!token); // Convert token presence to a boolean value
+    }, []);
+
+
+
     return (
         <>
             <ToastContainer position="bottom-right mt-6" theme={darkMode ? "dark" : "light"} limit={3} autoClose={2000} />
@@ -52,11 +61,25 @@ function Navbar({ darkMode, toggleDarkMode }) {
                         {darkMode ? <img onClick={toggleDarkMode} src="../../public/light-mode-icon.png" width={50} /> : <img onClick={toggleDarkMode} src="../../public/dark-mode-icon.png" width={50} />}
 
                     </div>
-                    <Button onClick={handlerShow} variant="btn btn-outline-secondary" className={darkMode ? "text-white" : "text-dark"}>
-                        ({productCounts})
-                        <BsCart className="mx-2"></BsCart>
-                        سبدخرید
-                    </Button>
+                    <div>
+                        {/* login and register button */}
+                        {isLoggedIn ? (
+                            // If token is present (user is logged in)
+                            <Button variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}><a href="/dashboard">Dashboard</a></Button>
+                        ) : (
+                            // If token is not present (user is not logged in)
+                            <>
+                                <Button variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}><Link to="/login">ورود</Link></Button>
+                                <Button variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}><Link to="/register">ثبت نام</Link></Button>
+                            </>
+                        )}
+                        {/* end login and register button */}
+                        <Button onClick={handlerShow} variant="btn btn-outline-secondary" className={darkMode ? "text-white" : "text-dark"}>
+                            ({productCounts})
+                            <BsCart className="mx-2"></BsCart>
+                            سبدخرید
+                        </Button>
+                    </div>
                 </NavbarBs.Collapse>
             </NavbarBs>
             <Modal show={showModal} onHide={handlerClose} contentClassName="card-bg" dir="rtl">
