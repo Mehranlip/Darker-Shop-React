@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom"
 import { Container } from "react-bootstrap"
 
 import { CartProvider } from "./context/CartContext"
+import { AuthProvider } from "./context/AuthContext"
 
 import Navbar from "./components/Navbar"
 import Shop from "./pages/Shop"
@@ -37,20 +38,22 @@ function App() {
 
   return (
     <div className={darkMode ? "dark-mode" : "light-mode"}>
-      <CartProvider>
-        <Container >
-          <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-          <Routes>
-            <Route index element={<Shop />} />
-            <Route path='/success' element={<Success />} />
-            <Route path="/products/:productId" element={<ProductDetail />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<RegistrationForm />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-          <Footer />
-        </Container>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <Container >
+            <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+            <Routes>
+              <Route index element={<Shop />} />
+              <Route path='/success' element={<Success />} />
+              <Route path="/products/:productId" element={<ProductDetail />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/register" element={<RegistrationForm />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+            <Footer />
+          </Container>
+        </CartProvider>
+      </AuthProvider>
     </div>
 
   )
