@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 const orderSchema = new Schema({
   items: { type: Array },
+  userId: { type: String }
 })
 
 module.exports = mongoose.model('Order', orderSchema)

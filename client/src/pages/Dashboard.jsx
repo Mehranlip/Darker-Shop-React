@@ -1,30 +1,43 @@
-import React, { useEffect, useState } from 'react';
+// src/components/Dashboard.js
+
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 function Dashboard() {
-    const [userData, setUserData] = useState(null);
+    const { token } = useAuth();
+    const [userData, setUserData] = useState("");
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/user-data', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-        if (token) {
-            fetch('http://localhost:3000/api/user-data', {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-            })
-                .then(response => response.json())
-                .then(data => setUserData(data))
-                .catch(error => console.error(error));
-        }
-    }, []);
+                if (response.ok) {
+                    const data = await response.json();
+                    setUserData(data);
+                    localStorage.setItem("userd", userData.userId)
+                } else {
+                    // Handle error
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchUserData();
+    }, [token]);
 
     return (
-        <div>
+        <div className='vh-100'>
+            <h2 className='mt-3'>داشبورد</h2>
             {userData ? (
                 <div>
-                    <h2>Welcome to Your Dashboard, {userData.username}!</h2>
-                    <p>Email: {userData.email}</p>
-                    {/* Display other user data */}
+                    <p>user id: {userData.userId}</p>
+                    {/* Display other user data here */}
                 </div>
             ) : (
                 <p>Loading...</p>

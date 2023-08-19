@@ -9,13 +9,16 @@ import { Link } from "react-router-dom"
 
 import { useAuth } from "../context/AuthContext"
 
+import { FaSignOutAlt } from 'react-icons/fa';
+
 
 function Navbar({ darkMode, toggleDarkMode }) {
     const [showModal, setShowModal] = useState(false)
     const cart = useContext(cartContext)
     const productCounts = cart.items.reduce((sum, product) => sum + product.quantity, 0)
 
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated, logout, token, userId } = useAuth();
+
 
 
     const handlerShow = () => {
@@ -25,17 +28,32 @@ function Navbar({ darkMode, toggleDarkMode }) {
         setShowModal(false)
     }
 
+
+
     async function checkout() {
-        const response = await fetch('http://localhost:3000/api', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ items: cart.items }),
-        })
+        try {
+            const response = await fetch('http://localhost:3000/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ items: cart.items, userId: userId }),
+            });
 
-        const data = await response.json()
+            if (!response.ok) {
+                const errorData = await response.text(); // Get the actual error response
+                console.error('Checkout request failed:', errorData);
+                return;
+            }
 
-        if (data.url) {
-            window.location.assign(data.url)
+            const data = await response.json();
+
+            if (data.url) {
+                window.location.assign(data.url);
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
         }
     }
 
@@ -65,8 +83,10 @@ function Navbar({ darkMode, toggleDarkMode }) {
                         {isAuthenticated ? (
                             // If token is present (user is logged in)
                             <>
-                                <Button onClick={logout} variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}>خروج</Button>
-                                <Button variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}><Link href="/dashboard">داشبورد</Link></Button>
+                                <Button onClick={logout} variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}>
+                                    <FaSignOutAlt className="mr-1" />
+                                </Button>
+                                <Button variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}><Link to="/dashboard">داشبورد</Link></Button>
                             </>
                         ) : (
                             // If token is not present (user is not logged in)

@@ -18,6 +18,11 @@ const register = async (req, res) => {
     }
 };
 
+const getUserData = (req, res) => {
+    const user = req.user; // user data is attached by the middleware
+    res.json(user);
+};
+
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -36,7 +41,10 @@ const login = async (req, res) => {
     }
 };
 
+
+
 module.exports = {
     register,
     login,
+    getUserData
 };

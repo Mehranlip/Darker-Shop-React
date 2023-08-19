@@ -1,9 +1,9 @@
 const Order = require('../models/order')
 
 async function createOrder(req, res) {
-  const { items } = req.body
+  const { items, userToken, userId } = req.body
 
-  const newOrder = new Order({ items })
+  const newOrder = new Order({ items, userId })
 
   await newOrder.save()
 
