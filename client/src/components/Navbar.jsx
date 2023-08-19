@@ -50,12 +50,12 @@ function Navbar({ darkMode, toggleDarkMode }) {
             <NavbarBs className="border-bottom border-secondary">
 
                 <NavbarBs.Collapse className="justify-content-between align-items-center">
-                    <div>
+                    <div className="d-none d-sm-block">
                         <a href="/">
                             {darkMode ? <img width="170px" src="../../public/logo.svg" /> : <img width="170px" src="../../public/logo-dark.svg" />}
                         </a>
                     </div>
-                    <div>
+                    <div >
 
                         {darkMode ? <img onClick={toggleDarkMode} src="../../public/light-mode-icon.png" width={50} /> : <img onClick={toggleDarkMode} src="../../public/dark-mode-icon.png" width={50} />}
 

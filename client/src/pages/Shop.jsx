@@ -38,7 +38,7 @@ function Shop() {
 
     return (
         <div dir="rtl">
-            <Row>
+            <Row className="m-0">
                 <Col sm={12} md={2}>
                     <div className="row">
                         {/* input search */}
