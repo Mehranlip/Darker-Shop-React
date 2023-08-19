@@ -66,7 +66,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
                             // If token is present (user is logged in)
                             <>
                                 <Button onClick={logout} variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}>خروج</Button>
-                                <Button variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}><a href="/dashboard">داشبورد</a></Button>
+                                <Button variant="btn btn-outline-secondary" className={darkMode ? "text-white mx-1" : "text-dark mx-1"}><Link href="/dashboard">داشبورد</Link></Button>
                             </>
                         ) : (
                             // If token is not present (user is not logged in)

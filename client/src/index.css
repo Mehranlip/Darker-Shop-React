@@ -18,10 +18,11 @@
     color: #ffffff;
   }
 
-  a {
-    color: #ffffff !important;
-  }
 
+}
+
+.dark-mode a {
+  color: #ffffff !important;
 }
 
 .light-mode {
@@ -37,8 +38,8 @@
     color: #000000;
   }
 
-  a {
-    color: #000000 !important;
-  }
+}
 
+.light-mode a {
+  color: #000000 !important;
 }
