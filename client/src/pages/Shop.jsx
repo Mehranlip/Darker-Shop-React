@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Row, Col } from "react-bootstrap"
+import { Row, Col, Button } from "react-bootstrap"
 
 import { productList } from "../data/items"
 import productCat from "../data/categoeis";
@@ -8,14 +8,25 @@ import productCat from "../data/categoeis";
 import ProductItem from './../components/ProductItem';
 
 
+
 function Shop() {
+    // state for category
     const [query, setQuery] = useState("")
     const [checkBoxValue, setCheckboxValue] = useState("All")
     const [rangePrice, setRangePrice] = useState(0)
     const selectedCategory = checkBoxValue === "All" ? "همه محصولات" : productCat.find(item => item.cat === checkBoxValue)?.namecat || "";
 
-    const allItems = [...productList];
+    // state for pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
 
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+
+
+    const allItems = [...productList];
+    // logic for  filter product form category
     const filteredItems = allItems.filter(itme => {
         const withinPriceRange = itme.price >= rangePrice
         const matchesCategory = checkBoxValue === "All" || itme.cat === checkBoxValue
@@ -24,7 +35,7 @@ function Shop() {
         return withinPriceRange && matchesCategory && matchesSearchTerm;
     });
 
-
+    // check and checkeout input category
     const handleCheckBoxValue = (e) => {
         const newData = e.target.value;
         setCheckboxValue(newData);
@@ -73,6 +84,7 @@ function Shop() {
                     </div>
                 </Col>
                 <Col sm={12} md={10}>
+                    {/* render category */}
                     <Row className="justify-content-center px-4 py-1 mt-3">
                         <Col>
                             <span>
@@ -84,9 +96,11 @@ function Shop() {
                             </span>
                         </Col>
                     </Row>
+                    {/* render category */}
+                    {/* render products */}
                     <Row xs={1} md={3} className="g-3 px-4 py-1">
                         {filteredItems.length > 0 ? (
-                            filteredItems.map((item) => (
+                            filteredItems.slice(startIndex, endIndex).map((item) => (
                                 <Col key={item.id} align="center">
                                     <ProductItem product={item} />
                                 </Col>
@@ -99,7 +113,34 @@ function Shop() {
                             ))
                         )}
                     </Row>
+                    {/* end render products */}
+                    {/* Pagination  */}
+                    <Row className="d-flex justify-content-center  mt-5">
+                        <Col sm={12} md={6} className="d-flex justify-content-center mt-3">
+                            <Button
+                                className="mx-3"
+                                variant="outline-secondary"
+                                onClick={() => setCurrentPage(currentPage - 1)}
+                                disabled={currentPage === 1}
+                            >
+                                قبلی
+                            </Button>
+                            <span className="p-2 border border-light rounded ">
+                                {currentPage}
+                            </span>
+                            <Button
+                                className="mx-3"
+                                variant="outline-secondary"
+                                onClick={() => setCurrentPage(currentPage + 1)}
+                                disabled={endIndex >= filteredItems.length}
+                            >
+                                بعدی
+                            </Button>
+                        </Col>
+                    </Row>
+                    {/* end Pagination */}
                 </Col>
+
             </Row>
 
 
