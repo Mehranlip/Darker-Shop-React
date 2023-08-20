@@ -15,6 +15,7 @@ import { useState, useEffect } from "react"
 import LoginForm from "./pages/Login"
 import RegistrationForm from "./pages/Registration"
 import Dashboard from "./pages/Dashboard"
+import Checkout from "./pages/Checkout"
 
 
 
@@ -49,6 +50,7 @@ function App() {
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegistrationForm />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
             <Footer />
           </Container>

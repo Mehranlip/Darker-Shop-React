@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext } from "react"
 import { Navbar as NavbarBs, Button, Modal } from "react-bootstrap"
 import { BsCart } from 'react-icons/bs'
 import { cartContext } from "../context/CartContext"
@@ -10,6 +10,8 @@ import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 
 import { FaSignOutAlt } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
+
 
 
 function Navbar({ darkMode, toggleDarkMode }) {
@@ -18,6 +20,8 @@ function Navbar({ darkMode, toggleDarkMode }) {
     const productCounts = cart.items.reduce((sum, product) => sum + product.quantity, 0)
 
     const { isAuthenticated, logout, token, userId } = useAuth();
+
+    const navigate = useNavigate();
 
 
 
@@ -29,34 +33,10 @@ function Navbar({ darkMode, toggleDarkMode }) {
     }
 
 
-
-    async function checkout() {
-        try {
-            const response = await fetch('http://localhost:3000/api/orders', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({ items: cart.items, userId: userId }),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.text(); // Get the actual error response
-                console.error('Checkout request failed:', errorData);
-                return;
-            }
-
-            const data = await response.json();
-
-            if (data.url) {
-                window.location.assign(data.url);
-            }
-        } catch (error) {
-            console.error('An error occurred:', error);
-        }
+    function checkout() {
+        navigate("/checkout")
+        setShowModal(false)
     }
-
 
 
 
@@ -123,7 +103,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
                         ) : (
                             <h3>سبد خرید خالی است</h3>
                         )}
-                        <Button className="mt-4" variant="btn btn-light" onClick={checkout}>ثبت سفارش</Button>
+                        <Button className="mt-4" variant="btn btn-light" onClick={checkout}>تسویه نهایی </Button>
                         <Button onClick={handlerClose} variant="btn btn-outline-secondary" className={darkMode ? "mt-4 mx-3 text-white" : "mt-4 mx-3 text-dark"}>بستن</Button>
                     </Modal.Body>
                 </Modal.Header>
