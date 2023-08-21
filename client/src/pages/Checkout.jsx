@@ -13,6 +13,7 @@ function Checkout() {
     const productCounts = cart.items.reduce((sum, product) => sum + product.quantity, 0)
     const { token, userId } = useAuth();
 
+
     const [name, setName] = useState("")
     const [lastName, setLastName] = useState("")
     const [address, setAddress] = useState("")

@@ -21,6 +21,8 @@ function Navbar({ darkMode, toggleDarkMode }) {
 
     const { isAuthenticated, logout, token, userId } = useAuth();
 
+
+
     const navigate = useNavigate();
 
 
